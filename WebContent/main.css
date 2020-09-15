@@ -1,0 +1,48 @@
+        body{
+			background: url(./img/bg.jpg) no-repeat;
+			background-size: 100%;
+            background-attachment:fixed;
+		}
+		.row {
+			    opacity: 0.9;
+			    margin-top: 10%;
+		}
+		.home-right-bar{
+        top:150px;
+        right:0;
+        position:fixed;
+        }
+		.home-right-bar a{
+        height:60px;
+        width:80px;
+        color:#000000;
+        font-size:12px;
+        }
+		.home-right-bar a:hover{
+        text-decoration: none;;
+        }
+		.home-right-bar li{
+        height:70px;
+        width:80px;
+        border: 1px solid #FF00FF;
+        text-align: center;
+        cursor:pointer;
+        }
+		.home-right-bar li:hover{
+        color:#FFFFFF;
+        background-color:#ff6700;
+        }
+        .home-right-bar img{
+        width:30px;
+        height:30px;
+        margin-top: 15px;
+        }
+		.home-right-bar .personInfo{
+        height:20px;
+        width:60px;
+        line-height: 20px;
+        margin-left: 8px;
+        }
+		.home-right-bar .border-none{
+        border-bottom: none;
+        }

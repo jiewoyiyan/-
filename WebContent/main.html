@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>商城</title>
+	
+	
+	<!-- //引入vue -->
+	<script src="framework/vue.js"></script>
+	<!-- 引入bootstrap -->
+	<link href="framework/bootstrap-3.3.1-dist/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="framework/jquery-3.3.1.js"></script>
+	<script src="framework/bootstrap-3.3.1-dist/dist/js/bootstrap.min.js"></script>
+	<script src="framework/axios.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<style type="text/css">
+		.table th,.table td{
+			text-align: center;
+			vertical-align: middle;!important;
+		}
+	</style>
+	
+</head>
+<body>
+	<div class="container" id="app">
+		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="navbar-header">
+				<a href="./img/logo.jpg" class="navbar-brand">LOGO</a>
+				<div class="navbar-toggle" data-toggle="collapse" data-target="#navbar1">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</div>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="">首页</a></li>
+					<li class="dropdown">
+						<a href="" class="dropdown-btn" data-toggle="dropdown">
+							产品
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header">电子产品</li>
+							<li><a href="">手机</a></li>
+							<li><a href="">电脑</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">服务</li>
+							<li><a href="">回收</a></li>
+							<li><a href="">维修</a></li>
+						</ul>
+					</li>
+					<li><a href="shopping-cart.html">我的购物车<span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+					<li><a href="myinfo.html">关于我们</a></li>					
+				</ul>
+				<ul class="nav navbar-nav navbar-right" style="margin-right: 1%">
+					<li class="active"><a href="logout">退出登录<span class="glyphicon glyphicon-log-out"></span></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="jumbotron" style="margin-top: 5%;min-height: 800px">
+		    <div class="container">
+		        <div class="row">
+		        	<div class="col-sm-6 col-md-3" v-for="(item,index) in shoppinginfo">
+		        		<div class="thumbnail"  style="text-decoration: none;min-height: 500px" >
+		        			<img :src="item.imgurl" alt="">
+		        			<div class="info">
+		        				<h3>{{item.name}}</h3>
+		        				<p>{{item.description}}</p>
+		        				<p>
+		        					<table class="table">
+		        					<tr>
+		        						<td><a href="myinfo.html">查看<span class="glyphicon glyphicon-eye-open"></span></a></td>
+		        						<td><a :href="'favorite?description='+item.description+'&imgurl='+
+		        						item.imgurl+'&price='+item.price">
+		        						购物车<span class="glyphicon glyphicon-star-empty"></a></td>
+		        					</tr>
+		        					</table>	
+		        				</p>
+		        			</div>
+		        		</div>
+		        	</div>
+		        </div>
+		    </div>
+        </div>
+    </div>
+
+	<div class="home-right-bar"><div class="well well-sm" style="opacity: 0.7;">
+            <ul>
+                <li class="border-none">
+                    <a href="myinfo.html">
+                        <img src="img/user.png">
+                        <div class="personInfo">个人中心</div>
+                    </a>
+                </li>
+                <li class="border-none">
+                    <a href="myinfo.html">
+                        <img src="img/earphone.png">
+                        <div class="personInfo">联系客服</div>
+                    </a>
+                </li>
+                <li class="border-none">
+                    <a href="shopping-cart.html">
+                        <img src="img/sider-shopcar.png">
+                        <div class="personInfo">购物车</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="img/top.png">
+                        <div class="personInfo">回到顶部</div>
+                    </a>
+                </li>
+            </ul>
+    </div></div>
+<script type="text/javascript">
+    new Vue({
+    	el:"#app",
+    	data:{
+    		shoppinginfo:[]
+    	},
+    	//页面加载时执行
+    	mounted:function(){
+    		this.getShopping();
+    	},
+    	methods:{
+    		getShopping: function(){
+    			let that=this;
+        		axios
+        		.post('gshopping')
+        		.then(function(response)
+        		{
+        			let jsonObj=JSON.parse(JSON.stringify(response.data));
+        			console.log(JSON.stringify(jsonObj));
+        			that.shoppinginfo=jsonObj;
+        		})
+        		.catch(function(error)
+        		{
+        			that.shopping=null;
+        			//console.log(error);
+        			alert("发生错误,获取商品信息失败");
+        		});
+    		}
+    	}
+    })
+</script>
+</body>
+</html>
