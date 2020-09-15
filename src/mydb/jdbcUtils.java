@@ -11,7 +11,7 @@ public class jdbcUtils {
 		Connection conn=null;
 		String url="jdbc:mysql://localhost:3306/shoppingmalldb?useSSL=false&serverTimezone=GMT%2B8";
 		String user="root";
-		String password="1154kang";
+		String password="root";
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
